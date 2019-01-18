@@ -23,10 +23,14 @@ Route::group(['middleware' => ['web', 'auth']], function(){
 	Route::get('/home', function(){
 		if(Auth::user()->admin == 0) {
 			return view('home');
-		} else {
+		} else if(Auth::user()->admin == 1) {
 			$users['users'] = \App\User::all();
-			return view('adminhome', $users);
+			return view('studentunionhome', $users);
+		} else if(Auth::user()->admin == 2) {
+			$users['users'] = \App\User::all();
+			return view('cesihome', $users);
 		}
+
 	});
 
 
