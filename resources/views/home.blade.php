@@ -18,7 +18,7 @@
                         <p>You're logged in as user</p>
                     </div>
 
-                    You are logged in!
+                    You are logged in
                 </div>
             </div>
         </div>
