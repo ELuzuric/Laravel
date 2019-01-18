@@ -21,12 +21,12 @@ Route::group(['middleware' => ['web', 'auth']], function(){
 	});
 
 	Route::get('/home', function(){
-		if(Auth::user()->admin == 0) {
+		if(Auth::user()->permission == 0) {
 			return view('home');
-		} else if(Auth::user()->admin == 1) {
+		} else if(Auth::user()->permission == 1) {
 			$users['users'] = \App\User::all();
 			return view('studentunionhome', $users);
-		} else if(Auth::user()->admin == 2) {
+		} else if(Auth::user()->permission == 2) {
 			$users['users'] = \App\User::all();
 			return view('cesihome', $users);
 		}
