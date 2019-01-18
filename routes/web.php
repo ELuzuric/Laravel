@@ -11,6 +11,23 @@
 |
 */
 
-Route::get('/', function () {
+
+
+Auth::routes();
+
+Route::group(['middleware' => ['web', 'auth']], function(){
+	Route::get('/', function () {
     return view('welcome');
+	});
+
+	Route::get('/home', function(){
+		if(Auth::user()->admin == 0) {
+			return view('home');
+		} else {
+			$users['users'] = \App\User::all();
+			return view('adminhome', $users);
+		}
+	});
+
+
 });
