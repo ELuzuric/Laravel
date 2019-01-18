@@ -16,10 +16,10 @@
                     @endif
 
                     <div class="alert alert-success" role="alert">
-                        <p>You're logged in as admin</p>
+                        <p>You're logged in as student union</p>
                     </div>
 
-                    You are logged in!
+                    
                 </div>
             </div>
         </div>
