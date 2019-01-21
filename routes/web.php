@@ -54,6 +54,7 @@
 
 	Route::resource('ideas', 'IdeaController');
 	Route::resource('activities', 'ActivityController');
+	Route::resource('comments', 'CommentController');
 
 
 
