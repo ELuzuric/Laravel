@@ -13,25 +13,49 @@
 
 
 
-Auth::routes();
+		Auth::routes();
 
-Route::group(['middleware' => ['web', 'auth']], function(){
-	Route::get('/', function () {
-    return view('welcome');
+	Route::group(['middleware' => ['web', 'auth']], function(){
+		Route::get('/', function () {
+	    return view('home');
+		});
+
+		Route::get('/home', function(){
+			if(Auth::user()->permission == 0) {
+				return view('home');
+			} else if(Auth::user()->permission == 1) {
+				$users['users'] = \App\User::all();
+				return view('home', $users);
+			} else if(Auth::user()->permission == 2) {
+				$users['users'] = \App\User::all();
+				return view('home', $users);
+			}
+
+		});
+
 	});
 
-	Route::get('/home', function(){
-		if(Auth::user()->permission == 0) {
-			return view('home');
-		} else if(Auth::user()->permission == 1) {
-			$users['users'] = \App\User::all();
-			return view('studentunionhome', $users);
-		} else if(Auth::user()->permission == 2) {
-			$users['users'] = \App\User::all();
-			return view('cesihome', $users);
-		}
 
+
+
+	Route::get('/pastactivities', function () {
+	    return view('pastactivities');
+	});
+
+	Route::get('/activities', function () {
+	    return view('activities');
+	});
+
+	Route::get('/shop', function () {
+	    return view('shop');
 	});
 
 
-});
+
+	Route::resource('ideas', 'IdeaController');
+	Route::resource('activities', 'ActivityController');
+
+
+
+
+

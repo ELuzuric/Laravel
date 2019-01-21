@@ -16,7 +16,7 @@
                     @endif
 
                     <div class="alert alert-success" role="alert">
-                        <p>You're logged in as student union</p>
+                        <p>Past Activities</p>
                     </div>
 
                     

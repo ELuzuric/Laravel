@@ -16,7 +16,7 @@
                     @endif
 
                     <div class="alert alert-success" role="alert">
-                        <p>You're logged in as cesi</p>
+                        <p>Shop</p>
                     </div>
 
                     

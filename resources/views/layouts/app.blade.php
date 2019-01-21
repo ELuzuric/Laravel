@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Cesi') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -21,11 +21,38 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+                <a class="navbar-brand" href="{{ url('/') }}">Cesi</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ url('/activities') }}">Activities</a>
+                        </li>
+                        @can('isStudentsUnion')
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ url('/activities/create') }}">Add an Activity</a>
+                        </li>
+                        @endcan
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ url('/pastactivities') }}">Past Activities</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ url('/ideas') }}">Ideas Box</a>
+                        </li>
+                        @can('isUser')
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ url('/ideas/create') }}">Add an Idea</a>
+                        </li>
+                        @endcan
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ url('/shop') }}">Shop</a>
+                        </li>
+                    </ul>
+                </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -71,6 +98,7 @@
                 </div>
             </div>
         </nav>
+
 
         <main class="py-4">
             @yield('content')
