@@ -12,15 +12,12 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    
 </head>
 <body>
     <div id="app">
@@ -33,7 +30,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{ url('/activities') }}">Activities</a>
+                            <a class="nav-link" href="{{ url('/activities') }}">Activities<span class="sr-only">(current)</span></a>
                         </li>
                         @can('isStudentsUnion')
                         <li class="nav-item active">
@@ -52,7 +49,7 @@
                         </li>
                         @endcan
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{ url('/shop') }}">Shop</a>
+                            <a class="nav-link" href="{{ url('/shop') }}">Boutique</a>
                         </li>
                     </ul>
                 </div>
@@ -101,7 +98,6 @@
                 </div>
             </div>
         </nav>
-
 
         <main class="py-4">
             @yield('content')

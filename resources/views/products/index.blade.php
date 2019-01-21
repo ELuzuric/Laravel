@@ -8,34 +8,27 @@
           <thead class="thead-dark">
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Activity Title</th>
-              <th scope="col">Activity Description</th>
-              <th scope="col">Date</th>
-              <th scope="col">Condition</th>
-              <th scope="col">Recurrence</th>
-              <th scope="col">Time</th>
+              <th scope="col">product Title</th>
+              <th scope="col">product Description</th>
+              <th scope="col">product Price</th>
               <th scope="col">Created At</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            @foreach($activities as $activity)
+            @foreach($products as $product)
             <tr>
-              <th scope="row">{{$activity->id}}</th>
-              <td><a href="/activities/{{$activity->id}}">{{$activity->title}}</a></td>
-              <td>{{$activity->description}}</td>
-              <td>{{$activity->date}}</td>
-              <td>{{$activity->condition}}</td>
-              <td>{{$activity->recurrence}}</td>
-              <td>{{$activity->time}}</td>
-              <td>{{$activity->created_at->toFormattedDateString()}}</td>
-
+              <th scope="row">{{$product->id}}</th>
+              <td><a href="/products/{{$product->id}}">{{$product->title}}</a></td>
+              <td>{{$product->description}}</td>
+              <td>{{$product->price}}</td>
+              <td>{{$product->created_at->toFormattedDateString()}}</td>
               <td>
               <div class="btn-group" role="group" aria-label="Basic example">
-                  <a href="{{ URL::to('activities/' . $activity->id . '/edit') }}">
+                  <a href="{{ URL::to('products/' . $product->id . '/edit') }}">
                   	<button type="button" class="btn btn-warning">Edit</button>
                   </a>&nbsp;
-                  <form action="{{url('activities', [$activity->id])}}" method="POST">
+                  <form action="{{url('products', [$product->id])}}" method="POST">
     					<input type="hidden" name="_method" value="DELETE">
    						<input type="hidden" name="_token" value="{{ csrf_token() }}">
    						<input type="submit" class="btn btn-danger" value="Delete"/>

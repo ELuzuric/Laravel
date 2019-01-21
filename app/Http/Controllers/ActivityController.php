@@ -47,7 +47,7 @@ class ActivityController extends Controller
             'time',
         ]);
         
-        $activity = Activity::create(['title' => $request->title,'description' => $request->description]);
+        $activity = Activity::create(['title' => $request->title,'description' => $request->description, 'date' => $request->date, 'condition' => $request->condition, 'recurrence' => $request->recurrence, 'time' => $request->time]);
         return redirect('/activities/'.$activity->id);
     }
 
@@ -109,8 +109,10 @@ class ActivityController extends Controller
      * @param  \App\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Activity $activity)
+    public function destroy(Request $request, Activity $activity)
     {
-        //
+        $activity->delete();
+        $request->session()->flash('message', 'Successfully deleted the activity!');
+        return redirect('activities');
     }
 }

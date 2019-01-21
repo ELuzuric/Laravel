@@ -15,14 +15,43 @@
         <input type="text" value="{{$activity->description}}" class="form-control" id="activityDescription" name="description" >
       </div>
       <div class="form-group">
-        <label for="condition">Condition Activity</label><br/>
-        <label class="radio-inline"><input type="radio" name="condition" value="1" <?php echo ($condition=='Free')?'checked':'' ?>>Free</label>
-        <label class="radio-inline"><input type="radio" name="condition" value="0" <?php echo ($condition=='Paying')?'checked':'' ?> >Paying</label>
+      	<div class="container">
+        	<div class="form-group">
+          		<div class='input-group date' value="{{$activity->date}}" class="form-control" id="activityDate" name="date">
+            		<input type='text' class="form-control" />
+              		<span class="input-group-addon">
+                		<span class="fa fa-calendar">
+                		</span>
+              		</span>
+          		</div>
+        	</div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+              $('#datetimepicker8').datetimepicker({
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down"
+                }
+              });
+            });
+        </script>
       </div>
       <div class="form-group">
-        <label for="recurrence">Recurrence Activity</label><br/>
-        <label class="radio-inline"><input type="radio" name="recurrence" value="1" <?php echo ($recurrence=='Ponctual')?'checked':'' ?>>Punctual</label>
-        <label class="radio-inline"><input type="radio" name="recurrence" value="0" <?php echo ($recurrence=='Recurrent')?'checked':'' ?> >Recurrent</label>
+        <label for="condition">Condition</label>
+        	<select class="form-control" name="condition" value="{{$activity->condition}}" class="form-control" id="activityCondition">
+            	<option>Free</option>
+            	<option>Paying</option>
+            </select>
+      </div>
+      <div class="form-group">
+        <label for="recurrence">Recurrence</label>
+        	<select class="form-control" name="recurrence" value="{{$activity->recurrence}}" class="form-control" id="activityRecurrence">
+            	<option>Ponctual</option>
+            	<option>Recurrent</option>
+          	</select>
       </div>
       <div class="form-group">
         <label for="time">Time</label>
