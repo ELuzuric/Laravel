@@ -54,10 +54,15 @@
                     <p>{{$comment->description}}</p>
                     <div class="stats">
                         <a href="#" class="btn btn-default stat-item">
-                            <i class="fa fa-thumbs-up icon"></i>2
+                             <a href="{{ URL::to('comments/' . $comment->id . '/edit') }}">
+                    <button type="button" class="btn btn-warning">Edit</button></i>
                         </a>
                         <a href="#" class="btn btn-default stat-item">
-                            <input type="submit" class="btn btn-danger" value="Delete"/></i>
+                             <form action="{{url('comments', [$comment->id])}}" method="POST">
+              <input type="hidden" name="_method" value="DELETE">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <input type="submit" class="btn btn-danger" value="Delete"/>
+            </form></i>
                         </a>
                     </div>
                 </div>
