@@ -55,6 +55,11 @@
 	Route::resource('ideas', 'IdeaController');
 	Route::resource('activities', 'ActivityController');
 	Route::resource('comments', 'CommentController');
+	Route::resource('products', 'ProductController');
+
+	Route::get('/demo', function () {
+    return view('demo');
+});
 
 
 
