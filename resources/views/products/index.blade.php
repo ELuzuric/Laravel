@@ -11,6 +11,7 @@
               <th scope="col">product Title</th>
               <th scope="col">product Description</th>
               <th scope="col">product Price</th>
+              <th scope="col">product Photo</th>
               <th scope="col">Created At</th>
               <th scope="col">Action</th>
             </tr>
@@ -21,7 +22,9 @@
               <th scope="row">{{$product->id}}</th>
               <td><a href="/products/{{$product->id}}">{{$product->title}}</a></td>
               <td>{{$product->description}}</td>
-              <td>{{$product->price}}</td>
+              <td>{{$product->price}} $</td>
+              <td><img src="/images/{{$product->URLimage}}" alt="" height="100px" 
+    width="150px" /></td>
               <td>{{$product->created_at->toFormattedDateString()}}</td>
               <td>
               <div class="btn-group" role="group" aria-label="Basic example">

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use File;
+use Illuminate\Support\Facades\Input;
+use DB;
 
 class ProductController extends Controller
 {
@@ -37,15 +40,27 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //Validate
+
+            //Validate
         $request->validate([
             'title' => 'required|min:3',
             'description' => 'required',
             'price' => 'required',
         ]);
-        
-        $product = Product::create(['title' => $request->title,'description' => $request->description, 'price' => $request->price]);
+
+        $user = new file;
+
+        if(Input::hasFile('file')){
+
+            $file = Input::file('file');
+            $file->move(public_path(). '/images', $file->getClientOriginalName());
+               $user->title = $file->getClientOriginalName();
+                $id = DB::getPdo()->lastInsertId();
+          
+        }
+        $product = Product::create(['title' => $request->title,'description' => $request->description, 'price' => $request->price, 'URLimage' =>$user->title]);
         return redirect('/products/'.$product->id);
+
     }
 
     /**
