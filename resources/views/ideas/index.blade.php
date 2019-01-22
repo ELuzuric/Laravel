@@ -34,7 +34,7 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="submit" class="btn btn-danger" value="Delete"/>
    				        </form>&nbsp;
-                  <a href="">
+                  <a href="/activities/ideastudent">
                     <button type="button" class="btn btn-success">Choose this idea</button>
                   </a>
                   

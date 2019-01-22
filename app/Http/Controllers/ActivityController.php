@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Activity;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Gate;
 
 class ActivityController extends Controller
 {
@@ -26,6 +27,10 @@ class ActivityController extends Controller
      */
     public function create()
     {
+        if(!Gate::allows('isStudentsUnion')){
+            $activities = Activity::all();
+            return view('activities.index',compact('activities',$activities));
+        }
         return view('activities.create');
     }
 
@@ -70,7 +75,12 @@ class ActivityController extends Controller
      */
     public function edit(Activity $activity)
     {
+        if(!Gate::allows('isStudentsUnion')){
+            $activities = Activity::all();
+            return view('activities.index',compact('activities',$activities));
+        }
         return view('activities.edit',compact('activity',$activity));
+        
     }
 
     /**
@@ -111,6 +121,10 @@ class ActivityController extends Controller
      */
     public function destroy(Request $request, Activity $activity)
     {
+        if(!Gate::allows('isStudentsUnion')){
+            $activities = Activity::all();
+            return view('activities.index',compact('activities',$activities));
+        }
         $activity->delete();
         $request->session()->flash('message', 'Successfully deleted the activity!');
         return redirect('activities');

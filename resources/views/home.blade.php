@@ -49,7 +49,7 @@
                         </li>
                         @endcan
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{ url('/shop') }}">Boutique</a>
+                            <a class="nav-link" href="{{ url('/products') }}">Boutique</a>
                         </li>
                     </ul>
                 </div>
