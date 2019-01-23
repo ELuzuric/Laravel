@@ -30,7 +30,7 @@ class IdeaController extends Controller
      */
     public function create()
     {
-        if(!Gate::allows('isUser', 'isStudentsUnion', 'isCesi')){
+        if(!Gate::allows('isUser')){
             $ideas = Idea::all();
             return view('ideas.index',compact('ideas',$ideas));
         }

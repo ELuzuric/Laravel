@@ -69,6 +69,32 @@
 });
 
 
+Route::resource('participates', 'ParticipateController');
+
+	// Route::put('/participates', function() {
+	// 	return view('participates/create');
+	// });
+
+	// Route::get('/participates', function() {
+	// 	return view('participates/index');
+	// });
+
+	// Route::get('/participates/create', 'ParticipateController@create');
+	// Route::post('/participates', 'ParticipateController@store');
+	// Route::get('/participates', 'ParticipateController@index');
+	
+
+// 	Route::get('/demo', function () {
+//     return view('demo');
+
+//     Route::middleware('auth')->group(function () {
+//     Route::resource('image', 'ImageController', [
+//         'only' => ['create', 'store', 'destroy']
+//     ]);
+// });
+// });
+
+
 
 
 

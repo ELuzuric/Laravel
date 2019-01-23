@@ -12,5 +12,8 @@
             <strong>Recurrence:</strong> {{ $activity->recurrence }}<br>
             <strong>Time:</strong> {{ $activity->time }}<br>
         </p>
+        @can('isStudentsUnion')
+        <a href="{{url('participates')}}"> <button type="submit" class="btn btn-primary">List of registered</button> </a>
+        @endcan
     </div>
 @endsection

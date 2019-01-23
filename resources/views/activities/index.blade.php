@@ -32,6 +32,7 @@
 
               <td>
               <div class="btn-group" role="group" aria-label="Basic example">
+                @can('isStudentsUnion')
                   <a href="{{ URL::to('activities/' . $activity->id . '/edit') }}">
                   	<button type="button" class="btn btn-warning">Edit</button>
                   </a>&nbsp;
@@ -39,6 +40,12 @@
     					<input type="hidden" name="_method" value="DELETE">
    						<input type="hidden" name="_token" value="{{ csrf_token() }}">
    						<input type="submit" class="btn btn-danger" value="Delete"/>
+              @endcan
+              @can('isUser')
+              <a href="participates/create">
+                <button type="button" class="btn btn-warning">Submit</button>
+              </a>&nbsp;
+              @endcan
    				  </form>
               </div>
 			</td>

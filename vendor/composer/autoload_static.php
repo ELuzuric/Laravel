@@ -446,6 +446,7 @@ class ComposerStaticInit3622554b3eaaaa6eea08d7393c534f80
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Middleware\\permission' => __DIR__ . '/../..' . '/app/Http/Middleware/permission.php',
         'App\\Idea' => __DIR__ . '/../..' . '/app/Idea.php',
+        'App\\Participate' => __DIR__ . '/../..' . '/app/Participate.php',
         'App\\Product' => __DIR__ . '/../..' . '/app/Product.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
