@@ -14,6 +14,7 @@
               <th scope="col">Condition</th>
               <th scope="col">Recurrence</th>
               <th scope="col">Time</th>
+              <th scope="col">Photo</th>
               <th scope="col">Created At</th>
               <th scope="col">Action</th>
             </tr>
@@ -28,6 +29,8 @@
               <td>{{$activity->condition}}</td>
               <td>{{$activity->recurrence}}</td>
               <td>{{$activity->time}}</td>
+              <td><img src="/images/{{$activity->URLimage}}" alt="" height="100px" 
+    width="150px" /></td>
               <td>{{$activity->created_at->toFormattedDateString()}}</td>
 
               <td>

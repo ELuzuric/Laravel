@@ -5,7 +5,7 @@
 @section('content')
     <h1>Add New Activity</h1>
     <hr>
-     <form action="/activities" method="post">
+     <form action="/activities" method="post" enctype="multipart/form-data">
      {{ csrf_field() }}
       <div class="form-group">
         <label for="title">Activity Title</label>
@@ -36,7 +36,13 @@
       <div class="form-group">
         <label for="description">Time</label>
         <input type="text" class="form-control" id="activityTime" name="time">
-      </div>     
+      </div>  
+      <div class="form-group"> 
+      <label  for="file">Picture</label>
+            <input type="file" name="file" id="file">
+
+            <input type="hidden" value="{{ csrf_token() }}" name="_token">
+     </div>    
       @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

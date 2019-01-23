@@ -10,6 +10,7 @@
               <!-- <th scope="col">#</th> -->
               <th scope="col">Idea Title</th>
               <th scope="col">Idea Description</th>
+              <th scope="col">Photo</th>
               <th scope="col">Created At</th>
               @can('isStudentsUnion')
               <th scope="col">Action</th>
@@ -22,6 +23,8 @@
               <!-- <th scope="row">{{$idea->id}}</th> -->
               <td><a href="/ideas/{{$idea->id}}">{{$idea->title}}</a></td>
               <td>{{$idea->description}}</td>
+              <td><img src="/images/{{$idea->URLimage}}" alt="" height="100px" 
+              width="150px" /></td>
               <td>{{$idea->created_at->toFormattedDateString()}}</td>
               <td>
               @can('isStudentsUnion')

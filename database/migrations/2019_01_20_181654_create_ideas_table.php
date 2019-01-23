@@ -17,6 +17,7 @@ class CreateIdeasTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('description');
+            $table->string('URLimage');
             $table->timestamps();
         });
     }

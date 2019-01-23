@@ -6,6 +6,9 @@ use App\Activity;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Gate;
+use File;
+use Illuminate\Support\Facades\Input;
+use DB;
 
 class ActivityController extends Controller
 {
@@ -51,8 +54,18 @@ class ActivityController extends Controller
             'recurrence' => 'required',
             'time',
         ]);
+        $user = new file;
+
+        if(Input::hasFile('file')){
+
+            $file = Input::file('file');
+            $file->move(public_path(). '/images', $file->getClientOriginalName());
+               $request->file = $file->getClientOriginalName();
+                $id = DB::getPdo()->lastInsertId();
+            }
         
-        $activity = Activity::create(['title' => $request->title,'description' => $request->description, 'date' => $request->date, 'condition' => $request->condition, 'recurrence' => $request->recurrence, 'time' => $request->time]);
+        $activity = Activity::create(['title' => $request->title,'description' => $request->description, 'date' => $request->date, 'condition' => $request->condition, 'recurrence' => $request->recurrence, 'time' => $request->time, 'URLimage' => $request->file]);
+       
         return redirect('/activities/'.$activity->id);
     }
 

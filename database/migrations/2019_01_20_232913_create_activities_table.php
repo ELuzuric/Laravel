@@ -21,6 +21,7 @@ class CreateActivitiesTable extends Migration
             $table->string('condition');
             $table->string('recurrence');
             $table->text('time');
+            $table->string('URLimage');
             $table->timestamps();
         });
     }

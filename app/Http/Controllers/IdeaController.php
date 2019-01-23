@@ -6,6 +6,9 @@ use App\Idea;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Gate;
+use File;
+use Illuminate\Support\Facades\Input;
+use DB;
 
 class IdeaController extends Controller
 {
@@ -50,8 +53,18 @@ class IdeaController extends Controller
             'title' => 'required|min:3',
             'description' => 'required',
         ]);
-        
-        $idea = Idea::create(['title' => $request->title,'description' => $request->description]);
+
+         $user = new file;
+
+        if(Input::hasFile('file')){
+
+            $file = Input::file('file');
+            $file->move(public_path(). '/images', $file->getClientOriginalName());
+               $request->file = $file->getClientOriginalName();
+                $id = DB::getPdo()->lastInsertId();
+            }
+
+        $idea = Idea::create(['title' => $request->title,'description' => $request->description, 'URLimage' => $request->file]);
         return redirect('/ideas/'.$idea->id);
     }
 

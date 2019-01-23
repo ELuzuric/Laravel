@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
 {
-    protected $fillable = ['title','description', 'date', 'condition', 'recurrence', 'time'];
+    protected $fillable = ['title','description', 'date', 'condition', 'recurrence', 'time', 'URLimage'];
 }
