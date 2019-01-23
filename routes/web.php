@@ -75,7 +75,11 @@
 });
 
 
-Route::resource('participates', 'ParticipateController');
+	Route::resource('participates', 'ParticipateController');
+
+	Route::get('/activities/ideastudent', function() {
+		return view('/activities/ideastudent');
+	});
 
 	// Route::put('/participates', function() {
 	// 	return view('participates/create');
