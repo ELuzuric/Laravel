@@ -50,6 +50,12 @@
 	    return view('shop');
 	});
 
+	// Route::get('/products/index/filter_a', array('as' => 'shop_Price_fitler_Desc', 'uses' => 'ProductController@filterUp'));
+	Route::get('/products/index/filter_priceasc', 'ProductController@filterUp');
+	Route::get('/products/index/filter_pricedesc', 'ProductController@filterDown');
+	Route::get('/products/index/filter_typeasc', 'ProductController@filterAZ');
+	Route::get('/products/index/filter_typedesc', 'ProductController@filterZA');
+
 
 
 	Route::resource('ideas', 'IdeaController');

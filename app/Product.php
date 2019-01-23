@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-     protected $fillable = ['title','description','price','URLimage'];
+     protected $fillable = ['type','title','description','price','URLimage'];
+     protected $dates = ['expired_at'];
 }

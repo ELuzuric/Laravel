@@ -5,6 +5,10 @@
     <hr>
      <form action="/products" method="post" enctype="multipart/form-data">
      {{ csrf_field() }}
+     <div class="form-group">
+        <label for="type">Product Type</label>
+        <input type="text" class="form-control" id="productType"  name="type">
+      </div>
       <div class="form-group">
         <label for="title">Product Title</label>
         <input type="text" class="form-control" id="taskTitle"  name="title">

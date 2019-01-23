@@ -58,7 +58,7 @@ class ProductController extends Controller
                 $id = DB::getPdo()->lastInsertId();
           
         }
-        $product = Product::create(['title' => $request->title,'description' => $request->description, 'price' => $request->price, 'URLimage' =>$user->title]);
+        $product = Product::create(['type' => $request->type,'title' => $request->title,'description' => $request->description, 'price' => $request->price, 'URLimage' =>$user->title]);
         return redirect('/products/'.$product->id);
 
     }
@@ -100,7 +100,8 @@ class ProductController extends Controller
             'description' => 'required',
             'price' => 'required',
         ]);
-        
+
+        $product->type = $request->type;
         $product->title = $request->title;
         $product->description = $request->description;
         $product->price = $request->price;
@@ -121,4 +122,40 @@ class ProductController extends Controller
         $request->session()->flash('message', 'Successfully deleted the product!');
         return redirect('products');
     }
+
+      public function filterUp(){
+
+        
+        $products = DB::table('products')->orderBy('price', 'asc') ->get();
+
+        return view('products.index',compact('products'));
+    
+  }
+
+  public function filterDown(){
+
+        
+        $products = DB::table('products')->orderBy('price', 'desc') ->get();
+
+        return view('products.index',compact('products'));
+    
+  }
+
+  public function filterAZ(){
+
+        
+        $products = DB::table('products')->orderBy('type', 'asc') ->get();
+
+        return view('products.index',compact('products'));
+    
+  }
+
+  public function filterZA(){
+
+        
+        $products = DB::table('products')->orderBy('type', 'desc') ->get();
+
+        return view('products.index',compact('products'));
+    
+  }
 }
