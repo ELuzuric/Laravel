@@ -37,7 +37,7 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="submit" class="btn btn-danger" value="Delete"/>
    				        </form>&nbsp;
-                  <a href="{{ URL::to('activities/ideastudent') }}">
+                  <a href="{{ URL::to('activities/ideastudent?idea='.$idea->id) }}">
                     <button type="button" class="btn btn-success">Choose this idea</button>
                   </a>
                   

@@ -63,7 +63,6 @@ class IdeaController extends Controller
                $request->file = $file->getClientOriginalName();
                 $id = DB::getPdo()->lastInsertId();
             }
-
         $idea = Idea::create(['title' => $request->title,'description' => $request->description, 'URLimage' => $request->file]);
         return redirect('/ideas/'.$idea->id);
     }
