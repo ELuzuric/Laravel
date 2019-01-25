@@ -58,6 +58,15 @@
 	Route::get('/products/index/filter_typeasc', 'ProductController@filterAZ');
 	Route::get('/products/index/filter_typedesc', 'ProductController@filterZA');
 
+	Route::get('/products', 'ProductController@index');
+	Route::post('/products/fetch', 'ProductController@fetch')->name('autocomplete.fetch');
+
+	Route::get('/autocomplete', 'AutocompleteController@index');
+	Route::post('/autocomplete/fetch', 'ProductController@fetch')->name('autocomplete.fetch');
+
+	Route::get('/products/index/filterBar/{title}', 'ProductController@filterBar');
+	Route::get('/products/index/filterBar', 'ProductController@filterBar');
+
 
 
 	Route::resource('ideas', 'IdeaController');

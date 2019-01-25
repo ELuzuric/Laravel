@@ -7,6 +7,10 @@
      <input type="hidden" name="_method" value="PUT">
      {{ csrf_field() }}
       <div class="form-group">
+        <label for="title">Product Type</label>
+        <input type="text" value="{{$product->type}}" class="form-control" id="productTitle"  name="type" >
+      </div>
+      <div class="form-group">
         <label for="title">Product Title</label>
         <input type="text" value="{{$product->title}}" class="form-control" id="productTitle"  name="title" >
       </div>
