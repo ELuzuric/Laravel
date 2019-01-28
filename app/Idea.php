@@ -6,12 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Idea extends Model
 {
-	protected $fillable = ['title','description', 'URLimage'];
+	protected $fillable = ['title','description','email', 'URLimage'];
 
 
 
-	public function activities() 
-	{
-    	return $this->hasMany(\App\Activity::class);
-	}
 }

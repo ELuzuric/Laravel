@@ -13,6 +13,10 @@
         <label for="description">Idea Description</label>
         <input type="text" class="form-control" id="ideaDescription" name="description">
       </div>
+      <div class="form-group">
+        <label for="email">Email Student</label>
+        <input type="text" value="{{Auth::user()->email}}" class="form-control" id="ideaDescription" name="email">
+      </div>
       <div class="form-group"> 
       <label  for="file">Picture</label>
             <input type="file" name="file" id="file">

@@ -52,6 +52,7 @@ class IdeaController extends Controller
         $request->validate([
             'title' => 'required|min:3',
             'description' => 'required',
+            'email' => 'required',
         ]);
 
          $user = new file;
@@ -63,7 +64,7 @@ class IdeaController extends Controller
                $request->file = $file->getClientOriginalName();
                 $id = DB::getPdo()->lastInsertId();
             }
-        $idea = Idea::create(['title' => $request->title,'description' => $request->description, 'URLimage' => $request->file]);
+        $idea = Idea::create(['title' => $request->title,'description' => $request->description, 'email' => $request->email, 'URLimage' => $request->file]);
         return redirect('/ideas/'.$idea->id);
     }
 

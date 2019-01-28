@@ -15,29 +15,8 @@
         <input type="text" value="{{$activity->description}}" class="form-control" id="activityDescription" name="description" >
       </div>
       <div class="form-group">
-      	<div class="container">
-        	<div class="form-group">
-          		<div class='input-group date' value="{{$activity->date}}" class="form-control" id="activityDate" name="date">
-            		<input type='text' class="form-control" />
-              		<span class="input-group-addon">
-                		<span class="fa fa-calendar">
-                		</span>
-              		</span>
-          		</div>
-        	</div>
-        </div>
-        <script type="text/javascript">
-            $(function () {
-              $('#datetimepicker8').datetimepicker({
-                icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-arrow-up",
-                    down: "fa fa-arrow-down"
-                }
-              });
-            });
-        </script>
+        <label for="date">Activity Date</label>
+        <input type="date" value="{{$activity->date}}" class="form-control" id="activityDate" name="date" >
       </div>
       <div class="form-group">
         <label for="condition">Condition</label>

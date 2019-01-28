@@ -17,7 +17,7 @@
       </div>
       <div class="form-group">
         <label for="date">Date</label>
-        <input type="text" class="form-control" id="activityDate" name="date">
+        <input type="date" class="form-control" id="activityDate" name="date" placeholder="Date">
       </div>
       <div class="form-group">
         <label for="condition">Condition</label>

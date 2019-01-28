@@ -11,6 +11,13 @@
 |
 */
 
+use App\Notifications\IdeaCheck;
+use App\User;
+// use Notification;
+use App\Activity;
+use App\Notifications\Report;
+use Carbon\Carbon;
+
 
 
 		Auth::routes();
@@ -36,12 +43,36 @@
 	});
 
 	Route::get('/activities/ideastudent', function() {
-	return view('/activities/ideastudent');
+
+		$check=App\Activity::first();
+		// $user=App\User::first();
+
+		$email=\App\Idea::select('email')->where('id',$_GET['idea'])->get()[0]->email;
+		$email = str_replace(' ', '', $email);
+		
+		Notification::route('mail', $email)->notify(new IdeaCheck($check));
+
+
+		$report = \App\Activity::first();
+		$cesi = \App\User::select('email')->where('permission', 2)->get();
+
+		Notification::route('mail', $cesi)->notify(new Report($report));
+
+
+		// $cesi = \App\User::select('email')->get();
+
+
+		
+
+		return view('/activities/ideastudent');
 	});
 
 
 	Route::get('/pastactivities', function () {
-	    return view('pastactivities');
+
+		
+		return view('pastactivities');
+		
 	});
 
 	Route::get('/activities', function () {
@@ -49,14 +80,28 @@
 	});
 
 	Route::get('/shop', function () {
+
+		// User::find(1)->notify(new IdeaCheck);
+		// $user=App\User::first();
+		// $check=App\Activity::first();
+
+		// Notification::send($users, new IdeaCheck($check));
 	    return view('shop');
 	});
 
+	Route::post('/activities/create', function() {
+		// User::find(1)->notify(new IdeaCheck);
+
+	});
+
 	// Route::get('/products/index/filter_a', array('as' => 'shop_Price_fitler_Desc', 'uses' => 'ProductController@filterUp'));
+	
 	Route::get('/products/index/filter_priceasc', 'ProductController@filterUp');
 	Route::get('/products/index/filter_pricedesc', 'ProductController@filterDown');
 	Route::get('/products/index/filter_typeasc', 'ProductController@filterAZ');
 	Route::get('/products/index/filter_typedesc', 'ProductController@filterZA');
+	Route::get('/activities/index/cesi', 'ActivityController@cesi');
+	Route::get('/activities', 'ActivityController@RedirectForDate');
 
 
 
@@ -78,6 +123,7 @@
 
 
 	Route::resource('participates', 'ParticipateController');
+
 
 
 

@@ -17,7 +17,7 @@ class CreateActivitiesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('description');
-            $table->text('date');
+            $table->date('date');
             $table->string('condition');
             $table->string('recurrence');
             $table->text('time');
