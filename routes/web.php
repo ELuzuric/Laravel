@@ -51,6 +51,9 @@
 	Route::get('/shop', function () {
 	    return view('shop');
 	});
+	Route::get('/terms', function () {
+	    return view('terms');
+	});
 
 	// Route::get('/products/index/filter_a', array('as' => 'shop_Price_fitler_Desc', 'uses' => 'ProductController@filterUp'));
 	Route::get('/products/index/filter_priceasc', 'ProductController@filterUp');
