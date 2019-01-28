@@ -115,6 +115,12 @@ use Carbon\Carbon;
 	Route::get('/products/index/filterBar/{title}', 'ProductController@filterBar');
 	Route::get('/products/index/filterBar', 'ProductController@filterBar');
 
+	Route::get('/products/index/cart/{id}', 'ProductController@addToCart');
+	
+	Route::get('/cart', function () {
+	    return view('cart');
+	});
+
 
 
 	Route::resource('ideas', 'IdeaController');

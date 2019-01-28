@@ -11,6 +11,11 @@ use DB;
 
 class ProductController extends Controller
 {
+    public function __construct(){
+        if(!isset($_SESSION)){
+            session_start();
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -175,6 +180,59 @@ class ProductController extends Controller
         return view('products.index',compact('products'),compact('topproducts',$topproducts));
     
   }
+  
+  public function addToCart($id)
+    {
+    $product = Product::find($id);
+ 
+        if(!$product) {
+ 
+            abort(404);
+ 
+        }
+ 
+        $cart = session()->get('cart');
+ 
+        // if cart is empty then this the first product
+        if(!$cart) {
+
+            $cart = [
+                    $id => [
+                        "name" => $product->name,
+                        "quantity" => 1,
+                        "price" => $product->price,
+                        "photo" => $product->photo
+                    ]
+            ];
+ 
+            session()->put('cart', $cart);
+ 
+            return redirect()->back()->with('message', 'Successfully added to cart!');
+        }
+ 
+        // if cart not empty then check if this product exist then increment quantity
+        if(isset($cart[$id])) {
+ 
+            $cart[$id]['quantity']++;
+ 
+            session()->put('cart', $cart);
+ 
+            return redirect()->back()->with('message', 'Successfully added to cart!');
+ 
+        }
+ 
+        // if item not exist in cart then add to cart with quantity = 1
+        $cart[$id] = [
+            "name" => $product->name,
+            "quantity" => 1,
+            "price" => $product->price,
+            "photo" => $product->photo
+        ];
+ 
+        session()->put('cart', $cart);
+ 
+        return redirect()->back()->with('message', 'Successfully added to cart!');
+    }
 
   public function filterBar($title){
 

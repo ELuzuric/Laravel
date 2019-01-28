@@ -74,6 +74,9 @@
                   <a href="{{ URL::to('products/' . $product->id . '/edit') }}">
                   	<button type="button" class="btn btn-warning">Edit</button>
                   </a>&nbsp;
+                  <a href="{{ URL::to('/products/index/cart/' .$product->id)}}">
+                    <button type="button" class="btn btn-warning">Add To Cart</button>
+                  </a>&nbsp;
                   <form action="{{url('products', [$product->id])}}" method="POST">
     					<input type="hidden" name="_method" value="DELETE">
    						<input type="hidden" name="_token" value="{{ csrf_token() }}">
