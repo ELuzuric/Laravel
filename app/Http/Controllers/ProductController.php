@@ -18,8 +18,12 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $topproducts = DB::table('products')->orderBy('ordered', 'desc') 
+        ->limit(3)
+        ->get() ;
+
         $products = Product::all();
-        return view('products.index',compact('products',$products));
+        return view('products.index',compact('products',$products),compact('topproducts',$topproducts));
     }
 
     /**
@@ -43,6 +47,7 @@ class ProductController extends Controller
 
             //Validate
         $request->validate([
+            'type' => 'required',
             'title' => 'required|min:3',
             'description' => 'required',
             'price' => 'required',
@@ -125,37 +130,83 @@ class ProductController extends Controller
 
       public function filterUp(){
 
-        
+        $topproducts = DB::table('products')->orderBy('ordered', 'desc') 
+        ->limit(3)
+        ->get() ;
+       
         $products = DB::table('products')->orderBy('price', 'asc') ->get();
 
-        return view('products.index',compact('products'));
+        return view('products.index',compact('products'),compact('topproducts',$topproducts));
     
   }
 
   public function filterDown(){
 
+        $topproducts = DB::table('products')->orderBy('ordered', 'desc') 
+        ->limit(3)
+        ->get() ;
         
         $products = DB::table('products')->orderBy('price', 'desc') ->get();
 
-        return view('products.index',compact('products'));
+        return view('products.index',compact('products'),compact('topproducts',$topproducts));
     
   }
 
   public function filterAZ(){
 
-        
+        $topproducts = DB::table('products')->orderBy('ordered', 'desc') 
+        ->limit(3)
+        ->get() ;
+
         $products = DB::table('products')->orderBy('type', 'asc') ->get();
 
-        return view('products.index',compact('products'));
+        return view('products.index',compact('products'),compact('topproducts',$topproducts));
     
   }
 
   public function filterZA(){
 
-        
+        $topproducts = DB::table('products')->orderBy('ordered', 'desc') 
+        ->limit(3)
+        ->get() ;
+
         $products = DB::table('products')->orderBy('type', 'desc') ->get();
 
-        return view('products.index',compact('products'));
+        return view('products.index',compact('products'),compact('topproducts',$topproducts));
     
   }
+
+  public function filterBar($title){
+
+        $topproducts = DB::table('products')->orderBy('ordered', 'desc') 
+        ->limit(3)
+        ->get() ;
+
+        $products = DB::table('products')->where('title',$title) ->get();
+
+        return view('products.index',compact('products'),compact('topproducts',$topproducts));
+    
+  }
+
+  
+
+ function fetch(Request $request)
+    {
+     if($request->get('query'))
+     {
+      $query = $request->get('query');
+      $data = DB::table('products')
+        ->where('title', 'LIKE', "%{$query}%")
+        ->get();
+      $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+      foreach($data as $row)
+      {
+       $output .= "<li><a href='/products/index/filterBar/{$row->title}'>".$row->title."</a></li>";
+      }
+      $output .= '</ul>';
+      echo $output;
+     }
+    }
+
+
 }

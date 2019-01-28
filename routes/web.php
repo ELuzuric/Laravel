@@ -88,6 +88,9 @@ use Carbon\Carbon;
 		// Notification::send($users, new IdeaCheck($check));
 	    return view('shop');
 	});
+	Route::get('/terms', function () {
+	    return view('terms');
+	});
 
 	Route::post('/activities/create', function() {
 		// User::find(1)->notify(new IdeaCheck);
@@ -102,6 +105,15 @@ use Carbon\Carbon;
 	Route::get('/products/index/filter_typedesc', 'ProductController@filterZA');
 	Route::get('/activities/index/cesi', 'ActivityController@cesi');
 	Route::get('/activities', 'ActivityController@RedirectForDate');
+
+	Route::get('/products', 'ProductController@index');
+	Route::post('/products/fetch', 'ProductController@fetch')->name('autocomplete.fetch');
+
+	Route::get('/autocomplete', 'AutocompleteController@index');
+	Route::post('/autocomplete/fetch', 'ProductController@fetch')->name('autocomplete.fetch');
+
+	Route::get('/products/index/filterBar/{title}', 'ProductController@filterBar');
+	Route::get('/products/index/filterBar', 'ProductController@filterBar');
 
 
 
