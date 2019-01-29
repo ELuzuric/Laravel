@@ -16,12 +16,8 @@
               <th scope="col">Time</th>
               <th scope="col">Photo</th>
               <th scope="col">Created At</th>
-              @can('isStudentsUnion')
               <th scope="col">Action</th>
-              @endcan
-              @can('isCesi')
-              <th scope="col">Action</th>
-              @endcan
+              
             </tr>
           </thead>
           <tbody>
@@ -43,10 +39,7 @@
               @can('isStudentsUnion')
                   <a href="{{ URL::to('activities/' . $activity->id . '/edit') }}">
                   	<button type="button" class="btn btn-warning">Edit</button>
-                  </a>&nbsp;
-                  <a href="{{ URL::to('activities/' . $activity->id . '/download')  }}">
-                    <button type="button" class="btn btn-warning">Download</button>
-                  </a>&nbsp;
+                  </a>&nbsp;                  
                   <form action="{{url('activities', [$activity->id])}}" method="POST">
     					<input type="hidden" name="_method" value="DELETE">
    						<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -61,6 +54,9 @@
               <a href="/activities/index/cesi">
                 <button type="button" class="btn btn-warning">Report</button>
               </a>&nbsp;
+                <a href="{{ URL::to('activities/' . $activity->id . '/download')  }}">
+                    <button type="button" class="btn btn-warning">Download</button>
+                  </a>&nbsp;
               @endcan
    				  </form>
               </div>

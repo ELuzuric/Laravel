@@ -17,6 +17,7 @@ use Notification;
 use App\Notifications\Report;
 use Carbon\Carbon;
 use ZipArchive;
+use App\ImageComment;
 
 
 
@@ -39,34 +40,37 @@ class ActivityController extends Controller
     //     $startTime = new Carbon($date);
     //     $startTime->format('Y-m-d');
     //     $startTime->isPast();
-        
+
 
     //     if ($startTime ==  true) {
-            
+
     //         return redirect('/pastactivities/'.$activity->id)->with($activities);
     //     }
 
     // }
 
     public function index()
+    
     {
-
-
-
-
         $activities = Activity::all();
+        $now = Carbon::Today();
+        $test = Activity::select('date')->get();
         
-        // dd($activities->date);
+        foreach ($test as $key => $value) {
+
+
+            $lul = $test[$key]->date;
+
+            if ($lul < $now) {
+
+            }else {
+
+            }
+
+            
+        }
 
         return view('activities.index',compact('activities',$activities));
-        
-
-
-
-        // $cesi = Gate::allows('isCesi');
-
-        // dd($cesi);
-        // Notification::route('mail', $cesi)->notify(new Report($report));
 
     }
 
@@ -119,25 +123,25 @@ class ActivityController extends Controller
 
             $file = Input::file('file');
             $file->move(public_path(). '/images', $file->getClientOriginalName());
-               $request->file = $file->getClientOriginalName();
-                $id = DB::getPdo()->lastInsertId();
-            }
+            $request->file = $file->getClientOriginalName();
+            $id = DB::getPdo()->lastInsertId();
+        }
         
         $activity = Activity::create(['title' => $request->title,'description' => $request->description, 'date' => $request->date, 'condition' => $request->condition, 'recurrence' => $request->recurrence, 'time' => $request->time, 'URLimage' => $request->file]);
 
 
-       
+
 
         
         // $date = format('Y/m/d');
         // dd($now);
 
-                
+
          // $date->isPast();
          // dd($date);
 
         // if ($now >= $date) {
-            
+
         // }
 
         return redirect('/activities/'.$activity->id);
@@ -151,7 +155,13 @@ class ActivityController extends Controller
      */
     public function show(Activity $activity)
     {
-        return view('activities.show',compact('activity',$activity));
+        $info_activity = $activity;
+        $id_activity = $activity->id;
+        $imagecomment = DB::table('image_comments')->where('activity_id',$id_activity)->get();
+        return view('activities.show',compact('info_activity','imagecomment'));
+     
+
+        
     }
 
     /**
@@ -227,8 +237,8 @@ class ActivityController extends Controller
         Notification::route('mail', $cesi)->notify(new Report($report));
 
         return view('activities.index',compact('activities'));
-    
-  }
+
+    }
 
 
 
@@ -243,22 +253,22 @@ class ActivityController extends Controller
     //     $startTime->isPast();
 
     //     if ($startTime ==  true) {
-            
+
     //     return redirect('/pastactivities/'.$activity->id)->with($activities);
     //     }
     // }
     public function download_picture($id){
 
-                $table = DB::table('activities')->where('id', $id)->get();
+        $table = DB::table('activities')->where('id', $id)->get();
 
 
-                $zip = new ZipArchive();
-                $zip->open('images.zip', ZipArchive::CREATE);
-                foreach ($table as $el) {
-                $zip->addFile('images/'.$el->URLimage);
+        $zip = new ZipArchive();
+        $zip->open('images.zip', ZipArchive::CREATE);
+        foreach ($table as $el) {
+            $zip->addFile('images/'.$el->URLimage);
         }
         $zip->close();
-         header('Content-disposition: attachment; filename= images.zip'); 
+        header('Content-disposition: attachment; filename= images.zip'); 
         header('Content-Type: application/force-download'); 
         header('Content-Transfer-Encoding: fichier');
         header('Content-Length: '.filesize('images.zip')); 
@@ -266,5 +276,31 @@ class ActivityController extends Controller
         header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0'); 
         header('Expires: 0'); 
         readfile('images.zip');
-}
+    }
+
+
+    public function ImageStore(Request $request, $id)
+    {
+        $id_activity = $id;
+        $user = new file;
+        $Act = DB::table('activities')->where('id',$id_activity)->get();
+
+
+        if(Input::hasFile('file')){
+
+            $file = Input::file('file');
+            $file->move(public_path(). '/images', $file->getClientOriginalName());
+            $request->file = $file->getClientOriginalName();
+            $id = DB::getPdo()->lastInsertId();
+        }
+        
+        $imagecomment = ImageComment::create(['id' => $request->id, 'URLimage' => $request->file, 'activity_id' => $id_activity]);
+
+
+        $imagecomment = DB::table('image_comments')->where('activity_id',$id_activity)->get();
+        
+        return redirect('/activities/'.$id_activity);
+    }
+
+
 }

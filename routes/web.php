@@ -106,6 +106,7 @@ use Carbon\Carbon;
 	Route::get('/activities/index/cesi', 'ActivityController@cesi');
 	Route::get('/activities', 'ActivityController@RedirectForDate');
 	Route::get('/activities/{id}/download', 'ActivityController@download_picture');
+	Route::post('/activities/{id}/show/imagestore', 'ActivityController@ImageStore');
 
 	Route::get('/products', 'ProductController@index');
 	Route::post('/products/fetch', 'ProductController@fetch')->name('autocomplete.fetch');
@@ -128,6 +129,8 @@ use Carbon\Carbon;
 	Route::resource('activities', 'ActivityController');
 	Route::resource('comments', 'CommentController');
 	Route::resource('products', 'ProductController');
+
+	
 
 	Route::get('/demo', function () {
     return view('demo');
