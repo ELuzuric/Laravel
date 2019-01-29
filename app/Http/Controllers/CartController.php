@@ -15,8 +15,10 @@ public function cart()
     {
         return view('cart');
     }
-    public function deleteFromCart()
-    {
-        return view('cart');
+    //public function deleteFromCart()
+     //    {
+     //   $product->delete();
+     //   $request->session()->flash('message', 'Successfully deleted the product!');
+     //   return redirect('products');
     }
 }

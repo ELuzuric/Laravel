@@ -26,7 +26,7 @@
                 <tr>
                     <td data-th="Product">
                         <div class="row">
-                            <div class="col-sm-3 hidden-xs"><img src="{{ $details['photo'] }}" width="100" height="100" class="img-responsive"/></div>
+                            <div class="col-sm-3 hidden-xs"><img src="/images/{{$details['photo']}}" width="100" height="100" /></div>
                             <div class="col-sm-9">
                                 <h4 class="nomargin">{{ $details['name'] }}</h4>
                             </div>
@@ -54,6 +54,7 @@
             <td><a href="{{ url('/products') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
             <td colspan="2" class="hidden-xs"></td>
             <td class="hidden-xs text-center"><strong>Total ${{ $total }}</strong></td>
+            <td><button class="fa fa-refresh"><i class="fa fa-angle-left"></i>Order</td>
         </tr>
         </tfoot>
     </table>
