@@ -53,22 +53,6 @@ class ActivityController extends Controller
     
     {
         $activities = Activity::all();
-        $now = Carbon::Today();
-        $test = Activity::select('date')->get();
-        
-        foreach ($test as $key => $value) {
-
-
-            $lul = $test[$key]->date;
-
-            if ($lul < $now) {
-
-            }else {
-
-            }
-
-            
-        }
 
         return view('activities.index',compact('activities',$activities));
 
@@ -159,7 +143,7 @@ class ActivityController extends Controller
         $id_activity = $activity->id;
         $imagecomment = DB::table('image_comments')->where('activity_id',$id_activity)->get();
         return view('activities.show',compact('info_activity','imagecomment'));
-     
+
 
         
     }
@@ -281,25 +265,54 @@ class ActivityController extends Controller
 
     public function ImageStore(Request $request, $id)
     {
-        $id_activity = $id;
-        $user = new file;
-        $Act = DB::table('activities')->where('id',$id_activity)->get();
 
 
-        if(Input::hasFile('file')){
+        $activities = Activity::all();
+        $now = Carbon::Today();
+        $test = Activity::select('date')->where('id',$id)->get();
 
-            $file = Input::file('file');
-            $file->move(public_path(). '/images', $file->getClientOriginalName());
-            $request->file = $file->getClientOriginalName();
-            $id = DB::getPdo()->lastInsertId();
+
+        
+        foreach ($test as $key => $value) {
+
+
+            $lul = $test[$key]->date;
+            
+            if ($lul < $now) {
+                // dd($lul."---".$now);
+                $id_activity = $id;
+                $user = new file;
+                $Act = DB::table('activities')->where('id',$id_activity)->get();
+
+
+                if(Input::hasFile('file')){
+
+                    $file = Input::file('file');
+                    $file->move(public_path(). '/images', $file->getClientOriginalName());
+                    $request->file = $file->getClientOriginalName();
+                    $id = DB::getPdo()->lastInsertId();
+                }
+
+                $imagecomment = ImageComment::create(['id' => $request->id, 'URLimage' => $request->file, 'activity_id' => $id_activity]);
+
+
+                $imagecomment = DB::table('image_comments')->where('activity_id',$id_activity)->get();
+
+                return redirect('/activities/'.$id_activity);
+
+            }else {
+
+                $request->session()->flash('message', 'Sorry, you can not add an image on this activity!');
+
+                return view('activities.index',compact('activities',$activities));
+
+            }
+
+            
         }
-        
-        $imagecomment = ImageComment::create(['id' => $request->id, 'URLimage' => $request->file, 'activity_id' => $id_activity]);
 
 
-        $imagecomment = DB::table('image_comments')->where('activity_id',$id_activity)->get();
-        
-        return redirect('/activities/'.$id_activity);
+
     }
 
 

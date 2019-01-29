@@ -18,6 +18,12 @@ class CreateCommentsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->timestamps();
+            $table->integer('id_image')->unsigned();
+            $table->foreign('id_image')
+                  ->references('id_image')
+                  ->on('image_comments')
+                  ->onDelete('restrict')
+                  ->onUpdate('restrict');
         });
     }
 
@@ -28,6 +34,9 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        // Schema::table('comments', function(Blueprint $table) {
+        //     $table->dropForeign('image_comments_comments_id_foreign');
+        // });
+        Schema::drop('comments');
     }
 }

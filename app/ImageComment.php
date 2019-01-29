@@ -14,4 +14,9 @@ class ImageComment extends Model
     {
         return $this->belongsTo(\App\Activity::class);
     }
+
+        public function imagecomment() 
+	{
+    	return $this->hasMany(\App\Comment::class);
+	}
 }

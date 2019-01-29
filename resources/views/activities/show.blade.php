@@ -21,20 +21,23 @@
     @can('isUser')
 
     <form action="/activities/{{$info_activity->id}}/show/imagestore" method="post" role="form" enctype="multipart/form-data">
-          
-         <button type="button" class="btn btn-warning">Share a photo
-            <input type="file" name="file" id="file">
-          <input type="hidden" value="{{ csrf_token() }}" name="_token">
-         </button>
-        
-          <button type="submit" class="btn btn-primary">Submit</button>
-      </form>    
+
+     <button type="button" class="btn btn-warning">Share a photo
+        <input type="file" name="file" id="file">
+        <input type="hidden" value="{{ csrf_token() }}" name="_token">
+    </button>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>    
 
 
-      @endcan
-      @foreach($imagecomment as $image)
-      <img src="/images/{{$image->URLimage}}" alt="" height="100px" 
-      width="150px" />
-      @endforeach
-  </div>
-  @endsection
+@endcan
+@foreach($imagecomment as $image)
+<img src="/images/{{$image->URLimage}}" alt="" height="100px" 
+width="150px" /> 
+<a href="{{ URL::to('comments/create') }}">
+    <button type="button" class="btn btn-warning">Add Comment</button></i>
+</a>
+@endforeach
+</div>
+@endsection
