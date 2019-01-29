@@ -105,6 +105,7 @@ use Carbon\Carbon;
 	Route::get('/products/index/filter_typedesc', 'ProductController@filterZA');
 	Route::get('/activities/index/cesi', 'ActivityController@cesi');
 	Route::get('/activities', 'ActivityController@RedirectForDate');
+	Route::get('/activities/{id}/download', 'ActivityController@download_picture');
 
 	Route::get('/products', 'ProductController@index');
 	Route::post('/products/fetch', 'ProductController@fetch')->name('autocomplete.fetch');
@@ -116,7 +117,7 @@ use Carbon\Carbon;
 	Route::get('/products/index/filterBar', 'ProductController@filterBar');
 
 	Route::get('/products/index/cart/{id}', 'ProductController@addToCart');
-	
+
 	Route::get('/cart', function () {
 	    return view('cart');
 	});

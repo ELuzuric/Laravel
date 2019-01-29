@@ -44,6 +44,9 @@
                   <a href="{{ URL::to('activities/' . $activity->id . '/edit') }}">
                   	<button type="button" class="btn btn-warning">Edit</button>
                   </a>&nbsp;
+                  <a href="{{ URL::to('activities/' . $activity->id . '/download')  }}">
+                    <button type="button" class="btn btn-warning">Download</button>
+                  </a>&nbsp;
                   <form action="{{url('activities', [$activity->id])}}" method="POST">
     					<input type="hidden" name="_method" value="DELETE">
    						<input type="hidden" name="_token" value="{{ csrf_token() }}">

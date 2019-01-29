@@ -16,6 +16,8 @@ use App\Http\Controllers\IdeaController;
 use Notification;
 use App\Notifications\Report;
 use Carbon\Carbon;
+use ZipArchive;
+
 
 
 class ActivityController extends Controller
@@ -245,4 +247,24 @@ class ActivityController extends Controller
     //     return redirect('/pastactivities/'.$activity->id)->with($activities);
     //     }
     // }
+    public function download_picture($id){
+
+                $table = DB::table('activities')->where('id', $id)->get();
+
+
+                $zip = new ZipArchive();
+                $zip->open('images.zip', ZipArchive::CREATE);
+                foreach ($table as $el) {
+                $zip->addFile('images/'.$el->URLimage);
+        }
+        $zip->close();
+         header('Content-disposition: attachment; filename= images.zip'); 
+        header('Content-Type: application/force-download'); 
+        header('Content-Transfer-Encoding: fichier');
+        header('Content-Length: '.filesize('images.zip')); 
+        header('Pragma: no-cache'); 
+        header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0'); 
+        header('Expires: 0'); 
+        readfile('images.zip');
+}
 }
